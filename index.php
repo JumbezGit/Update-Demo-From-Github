@@ -27,20 +27,54 @@ if (isset($_POST['update'])) {
     <meta name="theme-color" content="#28a745">
 
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .container { max-width: 600px; margin: 0 auto; }
-        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #218838; }
-        pre { background-color: #f8f9fa; padding: 10px; border-radius: 5px; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e9f7ef, #d4edda);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .update-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+            padding: 25px;
+            max-width: 650px;
+            width: 100%;
+        }
+        .update-btn {
+            background: linear-gradient(90deg, #28a745, #218838);
+            border: none;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 50px;
+            transition: 0.3s ease-in-out;
+        }
+        .update-btn:hover {
+            background: linear-gradient(90deg, #218838, #1e7e34);
+            transform: scale(1.05);
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Update</h2>
-        <form method="post">
-            <button type="submit" name="update">Pull Latest Changes</button>
+    <div class="update-card">
+        <h2 class="text-center text-success mb-4">🔄 GitHub Auto Update</h2>
+        <form method="post" class="text-center mb-4">
+            <button type="submit" name="update" class="update-btn">
+                🚀 Pull Latest Changes
+            </button>
         </form>
-        <h3>Result:</h3>
+        <h5 class="text-secondary">Result:</h5>
         <pre><?php echo $result; ?></pre>
     </div>
 </body>
