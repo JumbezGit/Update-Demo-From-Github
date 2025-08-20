@@ -20,7 +20,12 @@ if (isset($_POST['update'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Update from GitHub</title>
+    <meta name="theme-color" content="#28a745">
+
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
         .container { max-width: 600px; margin: 0 auto; }
