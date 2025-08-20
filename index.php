@@ -73,7 +73,7 @@ if (isset($_POST['update'])) {
 </head>
 <body>
     <div class="update-card">
-        <h2 class="text-center text-success mb-4">🔄 GitHub Auto Update</h2>
+        <h2 class="text-center text-success mb-4">🔄 GitHub </h2>
         <form method="post" id="updateForm" class="text-center mb-4">
             <button type="submit" name="update" class="update-btn" id="updateBtn">
                 🚀 Pull Latest Changes
