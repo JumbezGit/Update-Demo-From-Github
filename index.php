@@ -8,14 +8,16 @@ if (isset($_POST['update'])) {
     // Execute git pull command
     $output = shell_exec('git pull origin main 2>&1');
     
-    // Determine success or failure
-    if (strpos($output, 'Already up to date') !== false || strpos($output, 'Updating') !== false) {
-        $result = ['status' => 'success', 'message' => 'Update successful! Repository is up to date.'];
+    // Determine the update status
+    if (strpos($output, 'Already up to date') !== false) {
+        $result = ['status' => 'no-update', 'message' => 'Your project is already up to date!'];
+    } elseif (strpos($output, 'Updating') !== false || strpos($output, 'files changed') !== false) {
+        $result = ['status' => 'success', 'message' => 'New changes have been successfully pulled from GitHub!'];
     } else {
-        $result = ['status' => 'error', 'message' => 'Update failed: ' . htmlspecialchars($output)];
+        $result = ['status' => 'error', 'message' => 'Failed to update: ' . htmlspecialchars($output)];
     }
 } else {
-    $result = ['status' => 'idle', 'message' => 'Click the button to pull the latest changes from the GitHub repository.'];
+    $result = ['status' => 'idle', 'message' => 'Click the button to check for updates from the GitHub repository.'];
 }
 ?>
 
@@ -25,33 +27,28 @@ if (isset($_POST['update'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update from Khamis</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .container { max-width: 600px; margin: 0 auto; }
-        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #218838; }
-        button:disabled { background-color: #6c757d; cursor: not-allowed; }
-        pre { background-color: #f8f9fa; padding: 10px; border-radius: 5px; }
-        .progress-container { width: 100%; background-color: #f3f3f3; border-radius: 5px; margin: 10px 0; }
-        .progress-bar { width: 0%; height: 20px; background-color: #28a745; border-radius: 5px; transition: width 0.1s linear; }
-        .message { font-weight: bold; margin: 10px 0; }
-        .success { color: #28a745; }
-        .error { color: #dc3545; }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <h2>Update Project from JumbezGit</h2>
-        <form method="post" id="updateForm">
-            <button type="submit" name="update" id="updateButton">Pull Latest Changes</button>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Update Project from JumbezGit</h2>
+        <form method="post" id="updateForm" class="mb-4">
+            <button type="submit" name="update" id="updateButton" 
+                    class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center justify-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+                Pull Latest Changes
+            </button>
         </form>
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
+        <div class="progress-container w-full bg-gray-200 rounded-full h-4 mb-4 overflow-hidden">
+            <div class="progress-bar bg-green-600 h-full rounded-full transition-all duration-100" id="progressBar" style="width: 0%"></div>
         </div>
-        <h3>Status:</h3>
-        <div class="message <?php echo $result['status']; ?>" id="message"><?php echo $result['message']; ?></div>
+        <div class="message text-center text-lg font-medium <?php echo $result['status'] === 'success' ? 'text-green-600' : ($result['status'] === 'error' ? 'text-red-600' : 'text-gray-600'); ?>" id="message">
+            <?php echo $result['message']; ?>
+        </div>
         <?php if ($result['status'] === 'error') { ?>
-            <pre><?php echo $result['message']; ?></pre>
+            <pre class="bg-gray-100 p-3 rounded-md text-sm text-gray-700 mt-2"><?php echo $result['message']; ?></pre>
         <?php } ?>
     </div>
     <script>
@@ -63,8 +60,9 @@ if (isset($_POST['update'])) {
         form.addEventListener('submit', () => {
             // Disable button and show initial message
             button.disabled = true;
-            message.textContent = 'Starting update...';
-            message.className = 'message';
+            button.classList.add('bg-gray-400', 'cursor-not-allowed');
+            message.textContent = 'Checking for updates...';
+            message.className = 'message text-center text-lg font-medium text-gray-600';
 
             // Simulate progress
             let progress = 0;
@@ -74,9 +72,9 @@ if (isset($_POST['update'])) {
                 progressBar.style.width = `${progress}%`;
                 if (progress >= 100) {
                     clearInterval(interval);
-                    message.textContent = 'Update in progress...';
+                    message.textContent = 'Pulling changes...';
                 }
-            }, 100); // Update every 100ms to simulate 2-second progress
+            }, 100); // Update every 100ms to simulate ~2-second progress
         });
     </script>
 </body>
