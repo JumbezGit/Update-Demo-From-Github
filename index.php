@@ -64,18 +64,48 @@ if (isset($_POST['update'])) {
             overflow-y: auto;
             font-size: 14px;
         }
+        .progress {
+            height: 20px;
+            border-radius: 50px;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="update-card">
         <h2 class="text-center text-success mb-4">🔄 GitHub Auto Update</h2>
-        <form method="post" class="text-center mb-4">
-            <button type="submit" name="update" class="update-btn">
+        <form method="post" id="updateForm" class="text-center mb-4">
+            <button type="submit" name="update" class="update-btn" id="updateBtn">
                 🚀 Pull Latest Changes
             </button>
         </form>
+
+        <!-- Progress bar -->
+        <div class="progress mb-3" id="progressBarContainer">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" 
+                 role="progressbar" style="width: 0%" id="progressBar"></div>
+        </div>
+
         <h5 class="text-secondary">Result:</h5>
         <pre><?php echo $result; ?></pre>
     </div>
+
+    <script>
+        document.getElementById("updateForm").addEventListener("submit", function () {
+            let progressBar = document.getElementById("progressBar");
+            let container = document.getElementById("progressBarContainer");
+            container.style.display = "block";
+            let width = 0;
+
+            let interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width += 5; // progress speed
+                    progressBar.style.width = width + "%";
+                }
+            }, 300); // update every 0.3s
+        });
+    </script>
 </body>
 </html>
