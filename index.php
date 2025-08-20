@@ -32,12 +32,16 @@ if (isset($_POST['update'])) {
 <body>
     <div class="container">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8a9dc2cd192ed1d1b59a5e365d2d1d8f0efb8c0b
         <h2>Update Project from GitHub</h2>
         <form method="post">
             <button type="submit" name="update">Pull Latest Changes</button>
         </form>
         <h3>Result:</h3>
         <pre><?php echo $result; ?></pre>
+<<<<<<< HEAD
 =======
         <div class="card shadow-sm p-4" style="max-width: 600px; margin: 0 auto;">
             <h2 class="card-title text-center mb-4">Update Project from JumbezGit</h2>
@@ -60,6 +64,8 @@ if (isset($_POST['update'])) {
             <?php } ?>
         </div>
 >>>>>>> 9af09a21e0d473b1a9ca248514464197f8c58379
+=======
+>>>>>>> 8a9dc2cd192ed1d1b59a5e365d2d1d8f0efb8c0b
     </div>
 </body>
 </html>
