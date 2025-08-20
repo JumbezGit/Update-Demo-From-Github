@@ -31,7 +31,7 @@ if (isset($_POST['update'])) {
 </head>
 <body>
     <div class="container">
-        <h2>Update Project from GitHub</h2>
+        <h2>Update Project from JumbezGit</h2>
         <form method="post">
             <button type="submit" name="update">Pull Latest Changes</button>
         </form>
