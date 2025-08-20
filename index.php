@@ -31,7 +31,7 @@ if (isset($_POST['update'])) {
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Update Project from JumbezGit</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">JumbezGit</h2>
         <form method="post" id="updateForm" class="mb-4">
             <button type="submit" name="update" id="updateButton" 
                     class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center justify-center">
