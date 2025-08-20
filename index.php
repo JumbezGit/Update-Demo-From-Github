@@ -20,7 +20,7 @@ if (isset($_POST['update'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update from GitHub</title>
+    <title>Update from Khamis</title>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
         .container { max-width: 600px; margin: 0 auto; }
